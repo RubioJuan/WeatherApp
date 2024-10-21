@@ -1,30 +1,59 @@
-@import url(variables.css);
-*{
+/* Asegúrate de que el cuerpo y el html tengan un 100% de altura */
+html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: var(--color-2);
-    font-family: "OpenSans-Regular";
-}
-body{
-    background: var(--background-1);
 }
 
-/* Elimina esto para comenzar. 👇*/
-.saludo{
+/* Posiciona la imagen de fondo */
+.background-img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    height: 50vh; /* La imagen ocupará la mitad de la pantalla */
+    object-fit: cover; /* Para que la imagen se ajuste correctamente */
+    border-bottom-left-radius: 50px; /* Curva en la esquina inferior izquierda */
+    border-bottom-right-radius: 50px; /* Curva en la esquina inferior derecha */
+    z-index: 0; /* La imagen de fondo tiene el índice más bajo */
+    overflow: hidden; /* Asegura que las curvas sean visibles */
 }
-.saludo h3{
-    color: var(--color-3);
-    margin-top: 15px;
+
+/* Posiciona el main sobre la imagen de fondo */
+main {
+    position: relative;
+    z-index: 1; /* Se asegura que esté sobre la imagen de fondo */
+    height: 100%; /* Para que el contenido ocupe toda la pantalla */
+    width: 100%;
 }
-.saludo p{
-    margin-top: 10px;
-    width: 50%;
-    text-align: center;
+
+/* Estilo para el contenedor overlay */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
 }
-/*****************************☝️*/
+
+/* Posiciona el texto en la parte superior izquierda y más pequeño */
+.location-text {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    font-size: 16px; /* Reducido el tamaño de la fuente */
+    font-weight: bold;
+    z-index: 2;
+}
+
+/* Posiciona el ícono de búsqueda en la parte superior derecha y más pequeño */
+.search-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 30px; /* Reducido el tamaño del ícono */
+    z-index: 2;
+}
