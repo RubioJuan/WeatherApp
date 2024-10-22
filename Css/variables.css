@@ -10,19 +10,19 @@
 }
 @font-face {
     font-family: "OpenSans_Condensed-Bold";
-    src: url(../storage/font/ProductSans/OpenSans_Condensed-Bold.ttf);
+    src: url(../Storage/Font/ProductSans/OpenSans_Condensed-Bold.ttf);
 }
 @font-face {
     font-family: "OpenSans_Condensed-BoldItalic";
-    src: url(../storage/font/ProductSans/OpenSans_Condensed-BoldItalic.ttf);
+    src: url(../Storage/Font/ProductSans/OpenSans_Condensed-BoldItalic.ttf);
 }
 @font-face {
     font-family: "OpenSans_Condensed-ExtraBold";
-    src: url(../storage/font/ProductSans/OpenSans_Condensed-ExtraBold.ttf);
+    src: url(../Storage/Font/ProductSans/OpenSans_Condensed-ExtraBold.ttf);
 }
 @font-face {
     font-family: "OpenSans_Condensed-ExtraBoldItalic";
-    src: url(../storage/font/ProductSans/OpenSans_Condensed-ExtraBoldItalic.ttf);
+    src: url(../Storage/Font/ProductSans/OpenSans_Condensed-ExtraBoldItalic.ttf);
 }
 @font-face {
     font-family: "OpenSans_Condensed-Italic";
@@ -122,33 +122,33 @@
 }
 @font-face {
     font-family: "OpenSans-Italic";
-    src: url(../storage/font/ProductSans/OpenSans-Italic.ttf);
+    src: url(../Storage/Font/ProductSans/OpenSans-Italic.ttf);
 }
 @font-face {
     font-family: "OpenSans-Light";
-    src: url(../storage/font/ProductSans/OpenSans-Light.ttf);
+    src: url(../Storage/Font/ProductSans/OpenSans-Light.ttf);
 }
 @font-face {
     font-family: "OpenSans-LightItalic";
-    src: url(../storage/font/ProductSans/OpenSans-LightItalic.ttf);
+    src: url(../Storage/Font/ProductSans/OpenSans-LightItalic.ttf);
 }
 @font-face {
     font-family: "OpenSans-Medium";
-    src: url(../storage/font/ProductSans/OpenSans-Medium.ttf);
+    src: url(../Storage/Font/ProductSans/OpenSans-Medium.ttf);
 }
 @font-face {
     font-family: "OpenSans-MediumItalic";
-    src: url(../storage/font/ProductSans/OpenSans-MediumItalic.ttf);
+    src: url(../Storage/Font/ProductSans/OpenSans-MediumItalic.ttf);
 }
 @font-face {
     font-family: "OpenSans-Regular";
-    src: url(../storage/font/ProductSans/OpenSans-Regular.ttf);
+    src: url(../Storage/Font/ProductSans/OpenSans-Regular.ttf);
 }
 @font-face {
     font-family: "OpenSans-SemiBold";
-    src: url(../storage/font/ProductSans/OpenSans-SemiBold.ttf);
+    src: url(../Storage/Font/ProductSans/OpenSans-SemiBold.ttf);
 }
 @font-face {
     font-family: "OpenSans-SemiBoldItalic";
-    src: url(../storage/font/ProductSans/OpenSans-SemiBoldItalic.ttf);
+    src: url(../Storage/Font/ProductSans/OpenSans-SemiBoldItalic.ttf);
 }

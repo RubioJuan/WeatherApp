@@ -6,26 +6,30 @@ html, body {
     box-sizing: border-box;
 }
 
+
+/* Estilo para el contenedor de grados e ícono del clima */
+.weather-info {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 50vh;
+}
+
 /* Posiciona la imagen de fondo */
 .background-img {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 50vh; /* La imagen ocupará la mitad de la pantalla */
-    object-fit: cover; /* Para que la imagen se ajuste correctamente */
-    border-bottom-left-radius: 50px; /* Curva en la esquina inferior izquierda */
-    border-bottom-right-radius: 50px; /* Curva en la esquina inferior derecha */
-    z-index: 0; /* La imagen de fondo tiene el índice más bajo */
-    overflow: hidden; /* Asegura que las curvas sean visibles */
-}
-
-/* Posiciona el main sobre la imagen de fondo */
-main {
-    position: relative;
-    z-index: 1; /* Se asegura que esté sobre la imagen de fondo */
-    height: 100%; /* Para que el contenido ocupe toda la pantalla */
-    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    z-index: 0;
+    overflow: hidden;
 }
 
 /* Estilo para el contenedor overlay */
@@ -34,26 +38,234 @@ main {
     top: 0;
     left: 0;
     right: 0;
-    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    z-index: 2;
+}
+
+/* Posiciona el main sobre la imagen de fondo */
+main {
+    position: relative;
+    z-index: 1;
     height: 100%;
+    width: 100%;
 }
 
-/* Posiciona el texto en la parte superior izquierda y más pequeño */
+/* Estilo para el texto de ubicación y el icono de búsqueda */
+.location-text, .search-icon {
+    z-index: 3;
+}
+
 .location-text {
-    position: absolute;
-    top: 20px;
-    left: 20px;
     color: white;
-    font-size: 16px; /* Reducido el tamaño de la fuente */
+    font-size: 18px;
     font-weight: bold;
+}
+
+.search-icon {
+    width: 30px;
+}
+
+
+.overplay2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
     z-index: 2;
 }
 
-/* Posiciona el ícono de búsqueda en la parte superior derecha y más pequeño */
-.search-icon {
+/* Grados grandes y alineados a la izquierda */
+.temp-large {
+    font-size: 48px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-left: -20px;
+    margin-bottom: 10px;
+}
+
+/* Icono del clima y descripción */
+.weather-icon-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.weather-icon-container img {
+    width: 100px;
+    height: auto;
+}
+
+.description {
+    font-size: 18px;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+/* Información de día y noche alineada a la derecha */
+.day-night-info, .fecha-info {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 30px; /* Reducido el tamaño del ícono */
-    z-index: 2;
+    bottom: 40px;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.day-night-info {
+    right: 40px;
+    text-align: right;
+}
+
+.fecha-info {
+    left: 40px;
+}
+
+/* Nueva sección para contenido adicional justo debajo de la imagen */
+.extra-content {
+    background-color: #f4f4f4;
+    padding: 10px 20px; /* Ajusta el padding para que se vea más cerca de la imagen */
+    text-align: center; /* Centra los botones */
+    width: 100%;
+    position: relative; /* Mantiene el flujo normal */
+    z-index: 1;
+    margin-top: 10px; /* Espacio entre la imagen y la sección de información */
+}
+
+/* Estilo para los botones */
+.boton {
+    background-color: #ffffff;
+    border-radius: 3px;
+    border: none;
+    height: 40px; /* Ajusta la altura del botón */
+    width: 100px; /* Ajusta el ancho del botón */
+    margin: 10px; /* Espacio entre los botones */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    border-radius: 3vi;
+}
+
+/* Efecto hover para los botones */
+.Button-menu:hover {
+    background-color: #9f55d4a1;
+}
+
+.weather-details {
+    display: flex; /* Usamos flexbox para organizar los elementos */
+    justify-content: space-between; /* Espacio entre los elementos */
+    flex-wrap: wrap; /* Permitir que los elementos se muevan a la siguiente línea si no caben */
+    margin-top: 20px; /* Espacio superior para separar de otros elementos */
+}
+
+.detail {
+    display: flex; /* Para alinear el ícono y el texto en línea */
+    align-items: center; /* Centrar verticalmente */
+    width: 45%; /* Ajusta el ancho para que quepan dos por fila */
+    margin-bottom: 20px; /* Espacio inferior entre filas */
+}
+
+.detail img {
+    width: 30px; /* Ancho del ícono */
+    height: auto; /* Mantener la proporción del ícono */
+    margin-right: 10px; /* Espacio entre el ícono y el texto */
+}
+
+.detail span {
+    font-weight: bold; /* Resaltar los datos */
+}
+
+.weather-info {
+    display: flex;
+    align-items: center; /* Alinea los íconos y el texto */
+    margin-bottom: 10px; /* Espacio entre cada fila de información */
+}
+
+.weather-info img {
+    width: 30px; /* Ajusta el tamaño del ícono */
+    height: auto;
+    margin-right: 10px; /* Espacio entre el ícono y el texto */
+}
+
+.weather-label {
+    font-weight: bold; /* Hace que el texto de la etiqueta sea más destacado */
+}
+
+
+.a-hourly-forecast {
+    display: flex; /* Usamos Flexbox para alinear imagen y texto en línea */
+    align-items: center; /* Alinea verticalmente al centro */
+    margin-bottom: 10px; /* Espacio debajo del título */
+}
+
+.forecast-icon {
+    width: 40px; /* Ajusta el tamaño del icono */
+    height: auto; /* Mantiene la proporción del icono */
+    margin-right: 10px; /* Espacio entre la imagen y el título */
+}
+
+.forecast-title {
+    font-size: 24px; /* Tamaño del texto del título */
+    font-weight: bold; /* Hace que el texto sea negrita */
+}
+.hourly-forecast {
+    display: flex; /* Para mostrar todas las horas en una sola fila */
+    justify-content: space-around; /* Espacio entre los bloques de cada hora */
+}
+
+.hour {
+    text-align: center; /* Alinea el contenido dentro de cada bloque */
+    margin: 0 10px; /* Ajusta el espacio entre las horas */
+}
+
+.hour p {
+    margin: 5px 0; /* Reduce el espacio vertical entre los párrafos */
+    font-size: 15px; /* Tamaño de fuente más pequeño para mayor compactación */
+}
+
+.hour img {
+    width: 45px; /* Ajusta el tamaño de los iconos */
+    height: 40px; /* Mantén una proporción cuadrada */
+    margin: 10px 0; /* Menos espacio entre la imagen y el texto */
+}
+
+
+.forecast-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px; /* Espacio debajo del título */
+}
+
+.forecast-item {
+    display: flex; /* Usamos flexbox para alinear icono y texto */
+    flex-direction: column; /* Disposición vertical */
+    align-items: center; /* Centrar los elementos */
+    margin-bottom: 15px; /* Espacio entre elementos */
+}
+
+.weather-icon {
+    width: 40px; /* Ajusta el tamaño del ícono */
+    height: auto; /* Mantener proporción del ícono */
+    margin: 5px 0; /* Espacio vertical entre ícono y temperatura */
+}
+
+.chart-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#dayForecastChart {
+    width: 100% !important;
+    height: 400px !important;
 }

@@ -10,17 +10,100 @@
 </head>
 <body>
     <main>
-        <div class="overlay">
+       <div class="overlay">
             <p class="location-text" id="location">Kharkiv, Ukraine</p>
             <img class="search-icon" src="./Storage/Img/search_white.png" alt="Buscar">
         </div>
-        <!-- Nueva sección para mostrar información del clima -->
+
         <div class="weather-info">
-            <p id="current-temp">--°C</p>
-            <p id="weather-description">Descripción del clima</p>
+            <div class="overplay2">
+                <p id="current-temp" class="temp-large">--°C</p>
+                <div class="weather-icon-container">
+                    <img id="weather-icon" src="" alt="Icono del clima">
+                    <p id="weather-description" class="description">Descripción del clima</p>
+                </div>
+            </div>
+
+            <div class="day-night-info">
+                <p id="day-temp">Day: --°C</p>
+                <p id="night-temp">Night: --°C</p>
+            </div>
+
+            <p id="fecha" class="fecha-info"></p>
         </div>
+
+       <div class="extra-content">
+        <button class="boton Button-menu">Today</button>
+        <button class="boton Button-menu">Tomorrow</button>
+        <a href="./View/tenDays.html">
+            <button class="boton Button-menu">10 Days</button>
+        </a>
+        <div class="weather-details">
+            <div class="detail">
+                <img src="./Storage/Img/air.png" alt="">
+                Wind speed: <span id="wind-speed"></span>
+            </div>
+            <div class="detail">
+                <img src="./Storage/Img/rainy.png" alt="">
+                Rain chance: <span id="rain-chance"></span>
+            </div>
+            <div class="detail">
+                <img src="./Storage/Img/waves.png" alt="">
+                Pressure: <span id="pressure"></span>
+            </div>
+            <div class="detail">
+                <img src="./Storage/Img/light_mode.png" alt="">
+                UV Index: <span id="uv-index"></span>
+            </div>
+        </div>
+        <div class="a-hourly-forecast">
+            <img src="./Storage/Img/history_toggle_off.png" alt="Hourly Forecast" class="forecast-icon">
+            <p class="forecast-title">Hourly forecast</p>
+        </div>
+        <div class="hourly-forecast">
+            <div class="hour">
+                <p>Now</p>
+                <img id="icon-now" src="" alt="">
+                <p id="temp-now"></p>
+            </div>
+            <div class="hour">
+                <p>10 A.M</p>
+                <img id="icon-10am" src="" alt="">
+                <p id="temp-10am"></p>
+            </div>
+            <div class="hour">
+                <p>11 A.M</p>
+                <img id="icon-11am" src="" alt="">
+                <p id="temp-11am"></p>
+            </div>
+            <div class="hour">
+                <p>12 P.M</p>
+                <img id="icon-12pm" src="" alt="">
+                <p id="temp-12pm"></p>
+            </div>
+            <div class="hour">
+                <p>1 P.M</p>
+                <img id="icon-1pm" src="" alt="">
+                <p id="temp-1pm"></p>
+            </div>
+            <div class="hour">
+                <p>2 P.M</p>
+                <img id="icon-2pm" src="" alt="">
+                <p id="temp-2pm"></p>
+            </div>
+        </div> 
+        <div class="a-hourly-forecast">
+            <img src="./Storage/Img/calendar_month.png" alt="Hourly Forecast" class="forecast-icon">
+            <p class="forecast-title">Day forecast</p>
+        </div>       
+        <div class="chart-container">
+            <canvas id="dayForecastChart"></canvas>
+        </div>       
+    </div> 
     </main>
-    <img class="background-img" src="./Storage/Img/background.png" alt="Fondo">           
-    <script src="./Js/main.js" defer></script>
+    <img class="background-img" src="./Storage/Img/background.png" alt="Fondo">
 </body>
+    <script src="./Js/main.js" defer></script>
+    <canvas id="dayForecastChart"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </html>
