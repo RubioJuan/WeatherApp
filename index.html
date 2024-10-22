@@ -10,10 +10,13 @@
 </head>
 <body>
     <main>
-       <div class="overlay">
+        <div class="overlay">
             <p class="location-text" id="location">Kharkiv, Ukraine</p>
-            <img class="search-icon" src="./Storage/Img/search_white.png" alt="Buscar">
+            <img class="search-icon" src="./Storage/Img/search_white.png" id="search-icon" alt="Buscar" style="cursor: pointer;">
+            <input type="text" id="location-input" placeholder="Buscar lugar..." autocomplete="off">
+            <div id="suggestions" class="suggestions"></div>
         </div>
+        
 
         <div class="weather-info">
             <div class="overplay2">
@@ -98,8 +101,32 @@
         </div>       
         <div class="chart-container">
             <canvas id="dayForecastChart"></canvas>
-        </div>       
-    </div> 
+        </div> 
+        <div class="rain-chance">
+            <img src="./Storage/Img/rainy.png" alt="Rainy Icon">
+            <h3>Chance of Rain</h3>
+            <div id="rain-chance-details"></div>
+        </div>      
+        <div class="sun-info-container">
+    <div class="sun-info">
+        <div class="sun-info-content">
+            <img src="./Storage/Img/nights_stay.png" alt="Amanecer">
+            <p>Sunrise</p>
+        </div>
+        <p id="sunrise-time">--:-- AM</p> <!-- Aquí se mostrará la hora del amanecer desde la API -->
+        <p id="time-since-sunrise">--h ago</p> <!-- Aquí se mostrará el tiempo transcurrido desde el amanecer -->
+    </div>
+    <div class="sun-info">
+        <div class="sun-info-content">
+            <img src="./Storage/Img/bounding_box.png" alt="Atardecer">
+            <p>Sunset</p>
+        </div>
+        <p id="sunset-time">--:-- PM</p> <!-- Aquí se mostrará la hora del atardecer desde la API -->
+        <p id="time-to-sunset">in --h</p> <!-- Aquí se mostrará el tiempo restante hasta el atardecer -->
+    </div>
+</div>
+                              
+    </div>
     </main>
     <img class="background-img" src="./Storage/Img/background.png" alt="Fondo">
 </body>

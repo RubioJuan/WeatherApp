@@ -6,7 +6,6 @@ html, body {
     box-sizing: border-box;
 }
 
-
 /* Estilo para el contenedor de grados e ícono del clima */
 .weather-info {
     position: relative;
@@ -16,6 +15,76 @@ html, body {
     flex-direction: column;
     align-items: center;
     height: 50vh;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+    
+
+/* Estilo para el contenedor overlay */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    z-index: 2; /* Asegúrate de que esté por encima de otros elementos */
+}
+.location-text {
+    font-size: 2rem;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.search-icon {
+    width: 25px;
+    cursor: pointer;
+}
+
+#location-input {
+    display: none;
+    padding: 5px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: none;
+    width: 200px;
+    font-size: 1rem;
+}
+
+.suggestions {
+    position: absolute;
+    top: 60px;
+    background-color: #2ecc71;
+    border-radius: 10px;
+    width: 200px;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.suggestions p {
+    padding: 10px;
+    cursor: pointer;
+    margin: 0;
+    border-bottom: 1px solid #34495e;
+}
+
+.suggestions p:hover {
+    background-color: #3498db;
+}
+
+/* Posiciona el main sobre la imagen de fondo */
+main {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
 }
 
 /* Posiciona la imagen de fondo */
@@ -30,28 +99,6 @@ html, body {
     border-bottom-right-radius: 50px;
     z-index: 0;
     overflow: hidden;
-}
-
-/* Estilo para el contenedor overlay */
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    z-index: 2;
-}
-
-/* Posiciona el main sobre la imagen de fondo */
-main {
-    position: relative;
-    z-index: 1;
-    height: 100%;
-    width: 100%;
 }
 
 /* Estilo para el texto de ubicación y el icono de búsqueda */
@@ -69,7 +116,7 @@ main {
     width: 30px;
 }
 
-
+/* Overlay adicional */
 .overplay2 {
     display: flex;
     justify-content: space-between;
@@ -135,12 +182,12 @@ main {
 /* Nueva sección para contenido adicional justo debajo de la imagen */
 .extra-content {
     background-color: #f4f4f4;
-    padding: 10px 20px; /* Ajusta el padding para que se vea más cerca de la imagen */
-    text-align: center; /* Centra los botones */
+    padding: 10px 20px;
+    text-align: center;
     width: 100%;
-    position: relative; /* Mantiene el flujo normal */
+    position: relative;
     z-index: 1;
-    margin-top: 10px; /* Espacio entre la imagen y la sección de información */
+    margin-top: 10px;
 }
 
 /* Estilo para los botones */
@@ -148,11 +195,10 @@ main {
     background-color: #ffffff;
     border-radius: 3px;
     border: none;
-    height: 40px; /* Ajusta la altura del botón */
-    width: 100px; /* Ajusta el ancho del botón */
-    margin: 10px; /* Espacio entre los botones */
-    cursor: pointer; /* Cambia el cursor al pasar por encima */
-    border-radius: 3vi;
+    height: 40px;
+    width: 100px;
+    margin: 10px;
+    cursor: pointer;
 }
 
 /* Efecto hover para los botones */
@@ -160,104 +206,75 @@ main {
     background-color: #9f55d4a1;
 }
 
+/* Detalles del clima */
 .weather-details {
-    display: flex; /* Usamos flexbox para organizar los elementos */
-    justify-content: space-between; /* Espacio entre los elementos */
-    flex-wrap: wrap; /* Permitir que los elementos se muevan a la siguiente línea si no caben */
-    margin-top: 20px; /* Espacio superior para separar de otros elementos */
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 20px;
 }
 
 .detail {
-    display: flex; /* Para alinear el ícono y el texto en línea */
-    align-items: center; /* Centrar verticalmente */
-    width: 45%; /* Ajusta el ancho para que quepan dos por fila */
-    margin-bottom: 20px; /* Espacio inferior entre filas */
+    display: flex;
+    align-items: center;
+    width: 45%;
+    margin-bottom: 20px;
 }
 
 .detail img {
-    width: 30px; /* Ancho del ícono */
-    height: auto; /* Mantener la proporción del ícono */
-    margin-right: 10px; /* Espacio entre el ícono y el texto */
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
 }
 
 .detail span {
-    font-weight: bold; /* Resaltar los datos */
+    font-weight: bold;
 }
 
-.weather-info {
-    display: flex;
-    align-items: center; /* Alinea los íconos y el texto */
-    margin-bottom: 10px; /* Espacio entre cada fila de información */
-}
-
-.weather-info img {
-    width: 30px; /* Ajusta el tamaño del ícono */
-    height: auto;
-    margin-right: 10px; /* Espacio entre el ícono y el texto */
-}
-
-.weather-label {
-    font-weight: bold; /* Hace que el texto de la etiqueta sea más destacado */
-}
-
-
-.a-hourly-forecast {
-    display: flex; /* Usamos Flexbox para alinear imagen y texto en línea */
-    align-items: center; /* Alinea verticalmente al centro */
-    margin-bottom: 10px; /* Espacio debajo del título */
-}
-
-.forecast-icon {
-    width: 40px; /* Ajusta el tamaño del icono */
-    height: auto; /* Mantiene la proporción del icono */
-    margin-right: 10px; /* Espacio entre la imagen y el título */
-}
-
-.forecast-title {
-    font-size: 24px; /* Tamaño del texto del título */
-    font-weight: bold; /* Hace que el texto sea negrita */
-}
+/* Pronóstico por hora */
 .hourly-forecast {
-    display: flex; /* Para mostrar todas las horas en una sola fila */
-    justify-content: space-around; /* Espacio entre los bloques de cada hora */
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
 }
 
 .hour {
-    text-align: center; /* Alinea el contenido dentro de cada bloque */
-    margin: 0 10px; /* Ajusta el espacio entre las horas */
+    text-align: center;
+    margin: 0 10px;
 }
 
 .hour p {
-    margin: 5px 0; /* Reduce el espacio vertical entre los párrafos */
-    font-size: 15px; /* Tamaño de fuente más pequeño para mayor compactación */
+    margin: 5px 0;
+    font-size: 15px;
 }
 
 .hour img {
-    width: 45px; /* Ajusta el tamaño de los iconos */
-    height: 40px; /* Mantén una proporción cuadrada */
-    margin: 10px 0; /* Menos espacio entre la imagen y el texto */
+    width: 45px;
+    height: 40px;
+    margin: 10px 0;
 }
 
-
+/* Título del pronóstico */
 .forecast-title {
     font-size: 20px;
     font-weight: bold;
-    margin-bottom: 10px; /* Espacio debajo del título */
+    margin-bottom: 10px;
 }
 
 .forecast-item {
-    display: flex; /* Usamos flexbox para alinear icono y texto */
-    flex-direction: column; /* Disposición vertical */
-    align-items: center; /* Centrar los elementos */
-    margin-bottom: 15px; /* Espacio entre elementos */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
 .weather-icon {
-    width: 40px; /* Ajusta el tamaño del ícono */
-    height: auto; /* Mantener proporción del ícono */
-    margin: 5px 0; /* Espacio vertical entre ícono y temperatura */
+    width: 40px;
+    height: auto;
+    margin: 5px 0;
 }
 
+/* Contenedor del gráfico */
 .chart-container {
     width: 100%;
     max-width: 600px;
@@ -268,4 +285,94 @@ main {
 #dayForecastChart {
     width: 100% !important;
     height: 400px !important;
+}
+
+/* Gráfico de pronóstico */
+canvas {
+    max-width: 90%;
+    margin-top: 30px;
+}
+
+.rain-info {
+    display: flex;
+    align-items: center;
+    margin: 5px 0; /* Espaciado entre las entradas */
+}
+
+.rain-bar-container {
+    flex: 1; /* Toma el espacio restante */
+    background-color: #f0f0f0; /* Fondo gris claro para la barra */
+    border-radius: 5px; /* Bordes redondeados */
+    margin-left: 10px; /* Espaciado entre texto y barra */
+}
+
+.rain-bar {
+    height: 20px; /* Altura de la barra */
+    background-color: #007bff; /* Color de la barra */
+    color: rgb(56, 54, 54); /* Color del texto en la barra */
+    text-align: center; /* Centrar el texto */
+    border-radius: 5px; /* Bordes redondeados */
+}
+/* Contenedor principal que alineará los divs de amanecer y atardecer */
+.sun-info-container {
+    display: flex;
+    justify-content: space-between; /* Espacio entre los bloques */
+    align-items: flex-start; /* Alinea en la parte superior */
+    margin-top: 20px; /* Espaciado superior */
+}
+
+/* Estilos generales para los bloques de amanecer y atardecer */
+.sun-info {
+    display: flex;
+    flex-direction: column; /* Alinear elementos en columna */
+    width: 45%; /* Ocupar un 45% del contenedor */
+    text-align: left; /* Alinear texto a la izquierda */
+}
+
+/* Contenedor para imagen y título */
+.sun-info-content {
+    display: flex;
+    align-items: center; /* Alinea verticalmente la imagen y el texto */
+}
+
+/* Imagenes de amanecer y atardecer */
+.sun-info img {
+    width: 50px; /* Tamaño de las imágenes */
+    height: auto;
+    margin-right: 10px; /* Espacio entre la imagen y el título */
+}
+
+/* Estilos para los párrafos */
+.sun-info p {
+    margin: 5px 0; /* Margen entre los elementos */
+    font-size: 16px;
+    font-weight: 500;
+    color: #333; /* Color del texto */
+}
+
+/* Estilo específico para el tiempo (horas AM/PM) */
+#sunrise-time, #sunset-time {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff9800; /* Color resaltado para las horas */
+}
+
+/* Estilo específico para el tiempo transcurrido y restante */
+#time-since-sunrise, #time-to-sunset {
+    font-size: 14px;
+    font-style: italic;
+    color: #555; /* Color gris para el tiempo transcurrido/restante */
+}
+
+/* Responsive: cuando el tamaño de la pantalla es menor a 768px, apilamos las secciones */
+@media (max-width: 768px) {
+    .sun-info-container {
+        flex-direction: column; /* Apilar los bloques en lugar de alinearlos */
+        align-items: center; /* Centrar los bloques */
+    }
+    
+    .sun-info {
+        width: 100%; /* Hacer que ocupen el 100% del ancho */
+        margin-bottom: 20px; /* Espacio entre los bloques */
+    }
 }
