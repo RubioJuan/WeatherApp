@@ -22,9 +22,67 @@ const mostrarClimaActual = (data) => {
 
     // Mostrar datos adicionales de la API
     document.getElementById('wind-speed').textContent = `${data.current.wind_kph} km/h`; // Velocidad del viento
-    document.getElementById('rain-chance').textContent = `${todayForecast.day.daily_chance_of_rain}%`; // Probabilidad de lluvia
     document.getElementById('pressure').textContent = `${data.current.pressure_mb} hPa`; // Presión
     document.getElementById('uv-index').textContent = data.current.uv; // Índice UV
+
+    mostrarAmanecerAtardecer(todayForecast.astro);
+};
+
+// Función para mostrar amanecer y atardecer
+const mostrarAmanecerAtardecer = (astroData) => {
+    const sunriseTime = astroData.sunrise;
+    const sunsetTime = astroData.sunset;
+
+    // Mostrar la hora de amanecer y atardecer
+    document.getElementById('sunrise-time').textContent = sunriseTime;
+    document.getElementById('sunset-time').textContent = sunsetTime;
+
+    // Obtener la hora actual
+    const horaActual = new Date();
+
+    // Convertir la hora del amanecer y el atardecer a objetos Date
+    const [sunriseHour, sunriseMin] = convertirHora12A24(sunriseTime);
+    const [sunsetHour, sunsetMin] = convertirHora12A24(sunsetTime);
+
+    const amanecer = new Date(horaActual);
+    amanecer.setHours(sunriseHour, sunriseMin, 0, 0); // Configurar la hora del amanecer
+
+    const atardecer = new Date(horaActual);
+    atardecer.setHours(sunsetHour, sunsetMin, 0, 0); // Configurar la hora del atardecer
+
+    // Calcular tiempo desde el amanecer
+    const tiempoDesdeAmanecer = horaActual - amanecer;
+    const horasDesdeAmanecer = Math.floor(tiempoDesdeAmanecer / (1000 * 60 * 60));
+
+    if (horasDesdeAmanecer >= 0) {
+        document.getElementById('time-since-sunrise').textContent = `${horasDesdeAmanecer}h ago`;
+    } else {
+        document.getElementById('time-since-sunrise').textContent = '--h ago';
+    }
+
+    // Calcular tiempo hasta el atardecer
+    const tiempoHastaAtardecer = atardecer - horaActual;
+    const horasHastaAtardecer = Math.ceil(tiempoHastaAtardecer / (1000 * 60 * 60));
+
+    if (horasHastaAtardecer >= 0) {
+        document.getElementById('time-to-sunset').textContent = `in ${horasHastaAtardecer}h`;
+    } else {
+        document.getElementById('time-to-sunset').textContent = 'Sunset has passed';
+    }
+};
+
+// Función para convertir horas de formato 12h (AM/PM) a formato 24h
+const convertirHora12A24 = (hora12) => {
+    const [time, period] = hora12.split(' ');
+    let [hour, minutes] = time.split(':').map(Number);
+
+    if (period === 'PM' && hour !== 12) {
+        hour += 12;
+    } else if (period === 'AM' && hour === 12) {
+        hour = 0;
+    }
+
+    return [hour, minutes];
 };
 
 // Función para mostrar el pronóstico horario en la página
@@ -83,6 +141,41 @@ const mostrarGraficoPronostico = (data) => {
     });
 };
 
+// Función para mostrar la probabilidad de lluvia en una barra
+const mostrarProbabilidadLluvia = (data) => {
+    const hourlyData = data.forecast.forecastday[0].hour; // Pronóstico horario
+
+    const rainChanceDetails = document.getElementById('rain-chance-details');
+    rainChanceDetails.innerHTML = ''; // Limpiar contenido previo
+
+    // Iteramos sobre los datos de probabilidad de lluvia
+    hourlyData.forEach((hour) => {
+        const time = hour.time.split(' ')[1]; // Obtener solo la hora
+        const chance = hour.chance_of_rain; // Asegúrate de que esta propiedad sea correcta
+
+        // Crear un contenedor para la hora y la barra de probabilidad
+        const rainInfo = document.createElement('div');
+        rainInfo.classList.add('rain-info'); // Agregar clase para estilo
+
+        const timeText = document.createElement('span');
+        timeText.textContent = `${time}`; // Hora
+
+        const rainBarContainer = document.createElement('div');
+        rainBarContainer.classList.add('rain-bar-container');
+
+        const rainBar = document.createElement('div');
+        rainBar.classList.add('rain-bar');
+        rainBar.style.width = `${chance}%`; // Establecer el ancho de la barra según la probabilidad de lluvia
+        rainBar.textContent = `${chance}%`; // Mostrar porcentaje en la barra
+
+        // Añadir elementos al contenedor
+        rainBarContainer.appendChild(rainBar);
+        rainInfo.appendChild(timeText);
+        rainInfo.appendChild(rainBarContainer);
+        rainChanceDetails.appendChild(rainInfo);
+    });
+};
+
 // Función para obtener el clima actual y el pronóstico horario
 const getClimaActual = async () => {
     const url = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=Floridablanca&lang=es&days=1`; 
@@ -99,6 +192,7 @@ const getClimaActual = async () => {
         mostrarClimaActual(data);
         mostrarPronosticoHorarios(data);
         mostrarGraficoPronostico(data); // Llama a la función del gráfico
+        mostrarProbabilidadLluvia(data); // Llama a la función para mostrar la probabilidad de lluvia
     } catch (error) {
         console.error('Error:', error);
     }
@@ -128,3 +222,70 @@ window.addEventListener('scroll', () => {
         weatherInfo.classList.remove('visible'); // Oculta la información del clima
     }
 });
+
+// Referencias a los elementos del DOM
+const suggestionsContainer = document.getElementById('suggestions');
+const input = document.getElementById('location-input'); // Input de búsqueda de ciudad
+const searchIcon = document.getElementById('search-icon'); // Icono de lupa
+
+// Evento para manejar el clic en una sugerencia de ciudad
+suggestionsContainer.addEventListener('click', (event) => {
+    if (event.target.tagName === 'P') { // Asegúrate de que se haga clic en un elemento <p>
+        const selectedCity = event.target.textContent; // Obtén la ciudad seleccionada
+        buscarCiudad(selectedCity); // Llama a la función que busca el clima para esa ciudad
+        input.style.display = 'none'; // Ocultar el input después de seleccionar
+        suggestionsContainer.innerHTML = ''; // Limpiar sugerencias al seleccionar
+        suggestionsContainer.style.display = 'none'; // Ocultar sugerencias
+    }
+});
+
+// Función para mostrar/ocultar el input de búsqueda al hacer clic en la lupa
+searchIcon.addEventListener('click', (event) => {
+    event.stopPropagation(); 
+    if (input.style.display === 'none' || input.style.display === '') {
+        input.style.display = 'block'; // Mostrar el input
+        input.focus(); // Enfocar el input
+        suggestionsContainer.style.display = 'block'; // Mostrar sugerencias al abrir el input
+    } else {
+        input.style.display = 'none'; // Ocultar el input
+        suggestionsContainer.innerHTML = ''; // Limpiar sugerencias al ocultar
+        suggestionsContainer.style.display = 'none'; // Ocultar sugerencias
+    }
+});
+
+// Ocultar el input al hacer clic en cualquier lugar de la página
+document.addEventListener('click', (event) => {
+    if (event.target !== input && event.target !== searchIcon) {
+        input.style.display = 'none'; // Ocultar el input
+        suggestionsContainer.innerHTML = ''; // Limpiar sugerencias
+        suggestionsContainer.style.display = 'none'; // Ocultar sugerencias
+    }
+});
+
+// Evitar que el clic dentro del input lo oculte
+input.addEventListener('click', (event) => {
+    event.stopPropagation();
+});
+
+// Función para buscar el clima en una ciudad ingresada por el usuario
+const buscarCiudad = async (ciudad) => {
+    const url = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${ciudad}&lang=es&days=1`; 
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error('Error en la solicitud: ' + response.status);
+        }
+        const data = await response.json();
+        console.log("Datos del clima para la ciudad:", data);
+
+        // Llama a las funciones para mostrar los datos en el HTML
+        mostrarClimaActual(data);
+        mostrarPronosticoHorarios(data);
+        mostrarGraficoPronostico(data); // Llama a la función del gráfico
+        mostrarProbabilidadLluvia(data); // Llama a la función para mostrar la probabilidad de lluvia
+    } catch (error) {
+        console.error('Error:', error);
+    }
+};
+
